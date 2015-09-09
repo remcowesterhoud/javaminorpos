@@ -1,13 +1,12 @@
 package Controllers;
 
+import Models.Bankcard;
 import Models.Payment;
 import Models.Product;
 import Models.Receipt;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 /**
  * Created by Remco on 8-9-2015.
@@ -53,7 +52,9 @@ public class Sale {
     }
 
     public void finish(){
-        Receipt receipt = new Receipt(order, totalPrice(), calculateDiscount());
+        double total = totalPrice();
+        double change = pay(total);
+        Receipt receipt = new Receipt(order, total, calculateDiscount(), change);
         receipt.generateReceipt();
     }
 
@@ -72,5 +73,28 @@ public class Sale {
         }
 
         return totalDiscount;
+    }
+
+    public void addPayment(Payment payment){
+        payments.put(payment, payment.getId());
+    }
+    public double pay(double total){
+        int amountPayments = 0;
+
+        while(total> 0){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("You still need to pay: $" + total);
+            System.out.println("How would you like to pay? Choose 1. bankcard, 2. cheque, 3.creditcard or 4.ewallet");
+            int paymentType = scanner.nextInt();
+
+            Payment payment;
+            switch (paymentType){
+                case 1 :
+                    payment = new Bankcard(amountPayments);
+                    total -= payment.handlePayment();
+            }
+            amountPayments++;
+        }
+        return Math.abs(total);
     }
 }

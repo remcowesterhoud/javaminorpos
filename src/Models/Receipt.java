@@ -10,12 +10,13 @@ import java.util.Map;
 public class Receipt {
 
     private HashMap<Product, Integer> products;
-    private double totalPrice, discount;
+    private double totalPrice, discount, change;
 
-    public Receipt(HashMap<Product, Integer> products, double totalPrice, double discount) {
+    public Receipt(HashMap<Product, Integer> products, double totalPrice, double discount, double change) {
         this.products = products;
         this.totalPrice = totalPrice;
         this.discount = discount;
+        this.change = change;
     }
 
     public void generateReceipt(){
@@ -29,6 +30,8 @@ public class Receipt {
         System.out.println("Total:" + "\t\t\t\t$" + df.format(totalPrice));
         System.out.println("Discount:" + "\t\t\t$" + df.format(discount));
         System.out.println("New total:" + "\t\t\t$" + df.format(totalPrice - discount));
+        System.out.println("You have paid:" + "\t\t$" + df.format(totalPrice + change));
+        System.out.println("Your change:" + "\t\t$" + df.format(change));
         System.out.println("------------------------------");
     }
 }

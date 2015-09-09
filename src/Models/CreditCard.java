@@ -5,7 +5,12 @@ package Models;
  */
 public class CreditCard extends Payment {
 
-    public CreditCard(int id, int value) {
-        super(id, value);
+    public CreditCard(int id) {
+        super(id);
+    }
+
+    @Override
+    public double handlePayment() {
+        return 0;
     }
 }

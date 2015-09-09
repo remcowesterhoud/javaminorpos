@@ -5,8 +5,13 @@ package Models;
  */
 public class Cheque extends Payment {
 
-    public Cheque(int id,int value){
-        super(id, value);
+    public Cheque(int id){
+        super(id);
+    }
+
+    @Override
+    public double handlePayment() {
+        return 0;
     }
 
 

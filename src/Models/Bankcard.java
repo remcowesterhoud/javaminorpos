@@ -6,7 +6,13 @@ package Models;
 public class Bankcard extends Payment {
 
 
-    public Bankcard(int id, int value) {
-        super(id, value);
+    public Bankcard(int id) {
+        super(id);
+    }
+
+    public double handlePayment(){
+        System.out.println("How much would you like to pay?");
+        amount = scanner.nextDouble();
+        return amount;
     }
 }

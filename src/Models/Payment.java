@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Scanner;
+
 /**
  * Created by @author Matthijs van der Meijden on 9-9-2015.
  *
@@ -7,13 +9,16 @@ package Models;
 public abstract class Payment {
 
     private int id;
-    private int value;
+    protected double amount;
+    public Scanner scanner;
 
-    public Payment(int id, int value){
+    public Payment(int id){
         this.id = id;
-        this.value = value;
+        this.amount = 0;
+        scanner = new Scanner(System.in);
     }
 
+    public abstract double handlePayment();
 
 
     //getters and setters
@@ -26,11 +31,11 @@ public abstract class Payment {
         this.id = id;
     }
 
-    public int getValue() {
-        return value;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }
