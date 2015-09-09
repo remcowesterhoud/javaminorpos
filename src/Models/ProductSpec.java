@@ -12,10 +12,10 @@ public class ProductSpec {
 
     public ProductSpec(Map specification) {
         if (specification == null){
-            specification = new HashMap();
+            this.specification = new HashMap();
         }
         else{
-            specification = new HashMap(specification);
+            this.specification = new HashMap(specification);
         }
     }
 
