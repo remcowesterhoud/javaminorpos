@@ -33,6 +33,7 @@ public class Register {
 
     private void checkForProducts(){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter productcodes. Type checkout when done.");
         while (scanner.hasNextInt()){
             int input = scanner.nextInt();
             Product product = inventory.searchProduct(input);
