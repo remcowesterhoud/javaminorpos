@@ -2,6 +2,7 @@ package Controllers;
 
 import Enums.Brand;
 import Enums.ProductType;
+import Models.Customer;
 import Models.Product;
 import Models.ProductSpec;
 
@@ -15,11 +16,14 @@ import java.util.Scanner;
 public class Register {
 
     private Inventory inventory;
+    private CustomerRegister customers;
     private ArrayList<Discount> discounts;
     private Sale sale;
+    private Scanner scanner = new Scanner(System.in);
 
     public Register() {
         inventory = new Inventory();
+        customers = new CustomerRegister();
         discounts = new ArrayList<Discount>();
 
         addDummyData();
@@ -27,12 +31,12 @@ public class Register {
     }
 
     private void newSale(){
-        sale = new Sale(discounts);
+        Customer customer = checkCustomer();
+        sale = new Sale(discounts, customer);
         checkForProducts();
     }
 
     private void checkForProducts(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter productcodes. Type checkout when done.");
         while (scanner.hasNextInt()){
             int input = scanner.nextInt();
@@ -54,6 +58,30 @@ public class Register {
         }
     }
 
+    private Customer checkCustomer(){
+        System.out.println("Please enter your customer code. Leave empty if not a customer");
+        String input;
+        if (!(input = scanner.nextLine()).isEmpty()){
+            try {
+                Customer customer = customers.searchCustomer(Integer.parseInt(input));
+                if (customer != null) {
+                    System.out.println("Welcome " + customer.getfName() + " " + customer.getsName() + ". Thank you for shopping with us again.");
+                    return customer;
+                } else {
+                    System.out.println("Customer could not be found.");
+                    return checkCustomer();
+                }
+            }
+            catch (NumberFormatException ex){
+                System.out.println("Please enter a valid customer code.");
+                return checkCustomer();
+            }
+        }
+        else{
+            return null;
+        }
+    }
+
     private void addDummyData(){
         HashMap map = new HashMap();
         map.put("Merk", Brand.Heineken);
@@ -63,6 +91,9 @@ public class Register {
         inventory.addProduct(beer);
 
         discounts.add(new QuantityDiscount(beer, 2));
+
+        Customer customer = new Customer(123, "Laurens", "Oomen");
+        customers.addProduct(customer);
     }
 
     public static void main(String[] args){
