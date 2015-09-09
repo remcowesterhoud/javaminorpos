@@ -17,4 +17,9 @@ public class QuantityDiscount extends Discount{
     public int getQuantity() {
         return quantity;
     }
+
+    public double getDiscount(int quantityPurchased) {
+        int amount = quantityPurchased / (quantity + 1);
+        return amount * product.getPrice();
+    }
 }

@@ -14,7 +14,8 @@ public class PercentageDiscount extends Discount{
         this.percentage = percentage;
     }
 
-    public double getPercentage() {
-        return percentage;
+    public double getDiscount(int quantityPurchased) {
+        double discount = product.getPrice() * (percentage / 100);
+        return discount * quantityPurchased;
     }
 }

@@ -30,7 +30,12 @@ public class Sale {
     }
 
     public void deleteProduct(Product product){
-        order.remove(product);
+        if (order.get(product) > 1){
+            order.put(product, order.get(product) - 1);
+        }
+        else{
+            order.remove(product);
+        }
     }
 
     private double totalPrice(){
@@ -45,31 +50,26 @@ public class Sale {
 
     public void finish(){
         double total = totalPrice();
-//        double discount = calculateDiscount();
-//        System.out.println("Total price: $" + total);
-//        System.out.println("Discount: $" + discount);
-        System.out.println("New price: $" + (total));
+        double discount = calculateDiscount();
+        System.out.println("Total price: $" + total);
+        System.out.println("Discount: $" + discount);
+        System.out.println("New price: $" + (total - discount));
     }
 
-//    //TODO Shit method
-//    private double calculateDiscount(){
-//        double totalDiscount = 0;
-//        for (Product product : order){
-//            for (Discount discount : discounts){
-//                if (discount.getProduct().getProductCode() == product.getProductCode()){
-//                    if(discount instanceof PercentageDiscount){
-//                        double d = product.getPrice() * (((PercentageDiscount) discount).getPercentage() / 100);
-//                        totalDiscount += d;
-//                    }
-//                    else if (discount instanceof QuantityDiscount){
-//                        //TODO How do I do this?
-//                    }
-//                }
-//                else{
-//                    continue;
-//                }
-//            }
-//        }
-//        return totalDiscount;
-//    }
+    private double calculateDiscount(){
+        double totalDiscount = 0;
+
+        for (Map.Entry<Product, Integer> entry : order.entrySet()){
+            for (Discount discount : discounts){
+                if (entry.getKey() == discount.getProduct()){
+                    totalDiscount += discount.getDiscount(entry.getValue());
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+
+        return totalDiscount;
+    }
 }

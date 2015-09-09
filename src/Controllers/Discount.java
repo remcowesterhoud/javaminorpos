@@ -7,7 +7,7 @@ import Models.Product;
  */
 public abstract class Discount {
 
-    private Product product;
+    public Product product;
 
     public Discount(Product product) {
         this.product = product;
@@ -16,4 +16,6 @@ public abstract class Discount {
     public Product getProduct() {
         return product;
     }
+
+    public abstract double getDiscount(int quantityPurchased);
 }

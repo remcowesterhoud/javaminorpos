@@ -55,7 +55,7 @@ public class Register {
         Product beer = new Product(10, "Bier", spec, 123);
         inventory.addProduct(beer);
 
-        discounts.add(new PercentageDiscount(beer, 10));
+        discounts.add(new QuantityDiscount(beer, 2));
     }
 
     public static void main(String[] args){
