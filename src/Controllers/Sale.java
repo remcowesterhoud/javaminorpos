@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Customer;
+import Models.Payment;
 import Models.Product;
 import Models.Receipt;
 
@@ -17,9 +18,11 @@ public class Sale {
     private ArrayList<Discount> discounts;
     private static final double CUSTOMER_DISCOUNT = 5;
     private Customer customer;
+    private Map<Payment,Integer> payments;
 
     public Sale(ArrayList<Discount> discounts, Customer customer) {
         order = new HashMap<Product, Integer>();
+        payments = new HashMap<Payment, Integer>();
         this.discounts = discounts;
         this.customer = customer;
     }
