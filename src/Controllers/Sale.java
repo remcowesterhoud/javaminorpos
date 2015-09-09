@@ -51,9 +51,11 @@ public class Sale {
     public void finish(){
         double total = totalPrice();
         double discount = calculateDiscount();
+        System.out.println("----------------------------");
         System.out.println("Total price: $" + total);
         System.out.println("Discount: $" + discount);
         System.out.println("New price: $" + (total - discount));
+        System.out.println("----------------------------");
     }
 
     private double calculateDiscount(){

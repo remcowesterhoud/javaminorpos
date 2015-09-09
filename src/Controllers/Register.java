@@ -45,7 +45,13 @@ public class Register {
                 System.out.println(product.getSpec().getSpec("Merk") + " " + product.getSpec().getSpec("Type") + " was added too the shopping list.");
             }
         }
-        sale.finish();
+        switch (scanner.next()){
+            case "checkout" :
+                sale.finish();
+                newSale();
+            case "end" :
+                System.exit(0);
+        }
     }
 
     private void addDummyData(){
