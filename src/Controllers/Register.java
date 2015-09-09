@@ -59,7 +59,7 @@ public class Register {
         map.put("Merk", Brand.Heineken);
         map.put("Type", ProductType.Beer);
         ProductSpec spec = new ProductSpec(map);
-        Product beer = new Product(10, "Bier", spec, 123);
+        Product beer = new Product(10, "Heineken Bier", spec, 123);
         inventory.addProduct(beer);
 
         discounts.add(new QuantityDiscount(beer, 2));

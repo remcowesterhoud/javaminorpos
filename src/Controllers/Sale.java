@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Product;
+import Models.Receipt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,13 +50,8 @@ public class Sale {
     }
 
     public void finish(){
-        double total = totalPrice();
-        double discount = calculateDiscount();
-        System.out.println("----------------------------");
-        System.out.println("Total price: $" + total);
-        System.out.println("Discount: $" + discount);
-        System.out.println("New price: $" + (total - discount));
-        System.out.println("----------------------------");
+        Receipt receipt = new Receipt(order, totalPrice(), calculateDiscount());
+        receipt.generateReceipt();
     }
 
     private double calculateDiscount(){
