@@ -10,12 +10,13 @@ import java.util.Map;
 public class Receipt {
 
     private HashMap<Product, Integer> products;
-    private double totalPrice, discount, change;
+    private double totalPrice, productDiscount, customerDiscount, change;
 
-    public Receipt(HashMap<Product, Integer> products, double totalPrice, double discount, double change) {
+    public Receipt(HashMap<Product, Integer> products, double totalPrice, double productDiscount, double customerDiscount, double change) {
         this.products = products;
         this.totalPrice = totalPrice;
-        this.discount = discount;
+        this.productDiscount = productDiscount;
+        this.customerDiscount = customerDiscount;
         this.change = change;
     }
 
@@ -28,9 +29,10 @@ public class Receipt {
             System.out.println(entry.getKey().getName() + " x" + entry.getValue() + "\t$" + df.format(entry.getKey().getPrice() * entry.getValue()));
         }
         System.out.println("Total:" + "\t\t\t\t$" + df.format(totalPrice));
-        System.out.println("Discount:" + "\t\t\t$" + df.format(discount));
-        System.out.println("New total:" + "\t\t\t$" + df.format(totalPrice - discount));
-        System.out.println("You have paid:" + "\t\t$" + df.format(totalPrice + change));
+        System.out.println("Discount:" + "\t\t\t$" + df.format(productDiscount));
+        System.out.println("Customer discount" + "\t$" + df.format(customerDiscount));
+        System.out.println("New total:" + "\t\t\t$" + df.format(totalPrice - productDiscount - customerDiscount));
+        System.out.println("You have paid:" + "\t\t$" + df.format(totalPrice - productDiscount - customerDiscount + change));
         System.out.println("Your change:" + "\t\t$" + df.format(change));
         System.out.println("------------------------------");
     }
