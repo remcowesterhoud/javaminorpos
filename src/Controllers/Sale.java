@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Bankcard;
-import Models.Payment;
-import Models.Product;
-import Models.Receipt;
+import Models.*;
 
 import java.util.*;
 
@@ -17,7 +14,7 @@ public class Sale {
     private ArrayList<Discount> discounts;
     private Map<Payment,Integer> payments;
 
-    public Sale(ArrayList<Discount> discounts) {
+    public Sale(ArrayList<Discount> discounts, Customer customer) {
         order = new HashMap<Product, Integer>();
         payments = new HashMap<Payment, Integer>();
         this.discounts = discounts;
@@ -84,15 +81,33 @@ public class Sale {
         while(total> 0){
             Scanner scanner = new Scanner(System.in);
             System.out.println("You still need to pay: $" + total);
-            System.out.println("How would you like to pay? Choose 1. bankcard, 2. cheque, 3.creditcard or 4.ewallet");
+            System.out.println("How would you like to pay? Choose 1. cash, 2. bankcard, 3. cheque, 4. creditcard or 5. ewallet");
             int paymentType = scanner.nextInt();
 
             Payment payment;
             switch (paymentType){
                 case 1 :
+                    payment = new Cash(amountPayments);
+                    total -= payment.handlePayment();
+                    break;
+                case 2 :
                     payment = new Bankcard(amountPayments);
                     total -= payment.handlePayment();
+                    break;
+                case 3 :
+                    payment = new Cheque(amountPayments);
+                    total -= payment.handlePayment();
+                    break;
+                case 4 :
+                    payment = new CreditCard(amountPayments);
+                    total -= payment.handlePayment();
+                    break;
+                case 5 :
+                    payment = new Ewallet(amountPayments);
+                    total -= payment.handlePayment();
+                    break;
             }
+
             amountPayments++;
         }
         return Math.abs(total);
