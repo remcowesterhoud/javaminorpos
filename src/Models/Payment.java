@@ -20,7 +20,6 @@ public abstract class Payment {
 
     public abstract double handlePayment();
 
-
     //getters and setters
 
     public int getId(){

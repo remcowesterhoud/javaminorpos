@@ -9,10 +9,9 @@ public class Cheque extends Payment {
         super(id);
     }
 
-    @Override
     public double handlePayment() {
-        return 0;
+        System.out.println("How much would you like to pay?");
+        amount = scanner.nextDouble();
+        return amount;
     }
-
-
 }

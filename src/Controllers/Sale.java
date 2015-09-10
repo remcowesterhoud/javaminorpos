@@ -1,8 +1,11 @@
 package Controllers;
 
 
+import Enums.PaymentType;
+import Enums.ProductType;
 import Models.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -94,34 +97,73 @@ public class Sale {
         while (total > 0) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("You still need to pay: $" + total);
-            System.out.println("How would you like to pay? Choose 1. cash, 2. bankcard, 3. cheque, 4. creditcard or 5. ewallet");
-            int paymentType = scanner.nextInt();
+
+
+            System.out.println("WHow would you like to pay?? Options are:");
+            PaymentType[] types = PaymentType.values();
+            int i = 0;
+            for (PaymentType type : types){
+                i++;
+                System.out.println(i + ". for " + type);
+            }
+
+            PaymentType type = types[scanner.nextInt() - 1];
 
             Payment payment;
-            switch (paymentType) {
-                case 1:
+            switch (type) {
+                case Cash:
                     payment = new Cash(amountPayments);
                     total -= payment.handlePayment();
                     break;
-                case 2:
+                case Bankcard:
                     payment = new Bankcard(amountPayments);
                     total -= payment.handlePayment();
                     break;
-                case 3:
+                case Cheque:
+                    double chequeAmount = maxChequeValue(scanner);
                     payment = new Cheque(amountPayments);
-                    total -= payment.handlePayment();
-                    break;
-                case 4:
+                    double amountPayed = payment.handlePayment();
+                    if (amountPayed > chequeAmount){
+                        System.out.println("You do not have enough products of this type.");
+                        continue;
+                    }
+                    else {
+                        total -= amountPayed;
+                        break;
+                    }
+                case Creditcard:
                     payment = new CreditCard(amountPayments);
                     total -= payment.handlePayment();
                     break;
-                case 5:
+                case Ewallet:
                     payment = new Ewallet(amountPayments);
                     total -= payment.handlePayment();
                     break;
+                default:
+                    continue;
             }
             amountPayments++;
         }
         return Math.abs(total);
+    }
+
+    private double maxChequeValue(Scanner scanner){
+        double max = 0;
+
+        System.out.println("What type of cheque do you have? Options are:");
+        ProductType[] types = ProductType.values();
+        int i = 0;
+        for (ProductType type : types){
+            i++;
+            System.out.println(i + ". for " + type);
+        }
+
+        ProductType type = types[scanner.nextInt() - 1];
+        for (Map.Entry<Product, Integer> entry : order.entrySet()){
+            if (entry.getKey().getSpec().getSpec("Type") == type){
+                max += entry.getKey().getPrice() * entry.getValue();
+            }
+        }
+        return max;
     }
 }
