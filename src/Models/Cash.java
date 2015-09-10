@@ -12,7 +12,9 @@ public class Cash extends Payment {
     }
 
     @Override
-    public double handlePayment() {
-        return 0;
+    public double handlePayment(){
+        System.out.println("How much would you like to pay?");
+        amount = scanner.nextDouble();
+        return amount;
     }
 }
