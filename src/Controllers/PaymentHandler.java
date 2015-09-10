@@ -1,7 +1,7 @@
 package Controllers;
 
 import Enums.PaymentType;
-import Interfaces.Payment;
+import Models.Payment;
 import Models.*;
 
 import java.text.DecimalFormat;

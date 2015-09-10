@@ -1,19 +1,23 @@
 package Models;
 
+import java.util.Scanner;
+
 /**
- * Created by luppi on 9-9-2015.
+ * Created by Remco on 10-9-2015.
  */
-public class Bankcard implements Payment {
+public abstract class Payment {
+    protected Scanner scanner = new Scanner(System.in);
+    protected double amount;
+    protected int id;
 
-    private int id;
-    private double amount;
-
-    public Bankcard(int id) {
+    public Payment(int id){
         this.id = id;
-        amount = requestAmount();
     }
 
-    @Override
+    public double getAmountPayed() {
+        return amount;
+    }
+
     public double requestAmount() {
         System.out.println("Enter the amount you'd like too pay.");
         if (scanner.hasNextInt()){
@@ -25,12 +29,7 @@ public class Bankcard implements Payment {
         }
     }
 
-    @Override
-    public double getAmountPayed() {
-        return amount;
-    }
-
-    public int getId() {
+    public int getId(){
         return id;
     }
 }
