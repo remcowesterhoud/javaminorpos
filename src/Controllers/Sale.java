@@ -34,7 +34,9 @@ public class Sale {
             order.put(product, order.get(product) + 1);
         }
     }
-
+    public HashMap<Product, Integer> getOrder(){
+        return order;
+    }
     public void deleteProduct(Product product) {
         if (order.get(product) > 1) {
             order.put(product, order.get(product) - 1);
