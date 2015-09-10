@@ -7,15 +7,11 @@ public class CreditCard extends Payment {
 
     public CreditCard(int id) {
         super(id);
-
-        amount = requestAmount();
-
     }
 
     public double handlePayment(){
         System.out.println("How much would you like to pay?");
         amount = scanner.nextDouble();
         return amount;
-
     }
 }
