@@ -1,8 +1,6 @@
 package Controllers;
 
 
-import Enums.PaymentType;
-import Enums.ProductType;
 import Models.*;
 
 import java.util.*;

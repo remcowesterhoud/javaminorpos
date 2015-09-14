@@ -1,4 +1,4 @@
-package Enums;
+package Utility;
 
 /**
  * Created by Remco on 10-9-2015.

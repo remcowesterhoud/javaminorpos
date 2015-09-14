@@ -1,11 +1,11 @@
 package Controllers;
 
-import Enums.Brand;
-import Enums.ProductType;
+import Utility.Brand;
+import Utility.ProductType;
 import Models.Customer;
 import Models.Product;
 import Models.ProductSpec;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import Utility.SingleLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,6 +116,7 @@ public class Register {
         System.out.println();
     }
     public static void main(String[] args){
+        SingleLog log = SingleLog.getLog();
         new Register();
     }
 }

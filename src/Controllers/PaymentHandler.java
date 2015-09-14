@@ -1,6 +1,6 @@
 package Controllers;
 
-import Enums.PaymentType;
+import Utility.PaymentType;
 import Models.Payment;
 import Models.*;
 

@@ -1,6 +1,6 @@
 package Models;
 
-import Enums.ProductType;
+import Utility.ProductType;
 
 import java.util.HashMap;
 import java.util.Map;
