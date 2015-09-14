@@ -65,6 +65,7 @@ proguard/
 
 # Log Files
 *.log
+posLog
 
 
 ### Gradle ###
