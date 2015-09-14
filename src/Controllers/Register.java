@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Created by Remco on 8-9-2015.
  */
 public class Register {
 
+    private SingleLog log;
     private Inventory inventory;
     private CustomerRegister customers;
     private ArrayList<Discount> discounts;
@@ -25,6 +27,8 @@ public class Register {
     private Scanner scanner = new Scanner(System.in);
 
     public Register() {
+
+        log = SingleLog.getLog();
         inventory = new Inventory();
         customers = new CustomerRegister();
         discounts = new ArrayList<Discount>();
@@ -50,7 +54,8 @@ public class Register {
             }
             else {
                 sale.addProduct(product);
-                System.out.println(product.getSpec().getSpec("Merk") + " " + product.getSpec().getSpec("Type") + " was added too the shopping list.");
+                String productinfo = product.getSpec().getSpec("Merk") + " " + product.getSpec().getSpec("Type") + " was added too the shopping list.";
+                log.addInfo(productinfo);
             }
         }
         switch (scanner.next()){
@@ -78,7 +83,7 @@ public class Register {
             try {
                 Customer customer = customers.searchCustomer(Integer.parseInt(input));
                 if (customer != null) {
-                    System.out.println("Welcome " + customer.getfName() + " " + customer.getsName() + ". Thank you for shopping with us again.");
+                    log.addInfo("Sale started with customer: " + customer.getfName() + " " + customer.getsName());
                     return customer;
                 } else {
                     System.out.println("Customer could not be found.");
@@ -91,6 +96,7 @@ public class Register {
             }
         }
         else{
+            log.addInfo("Sale started with unknown customer");
             return null;
         }
     }
@@ -116,7 +122,6 @@ public class Register {
         System.out.println();
     }
     public static void main(String[] args){
-        SingleLog log = SingleLog.getLog();
         new Register();
     }
 }

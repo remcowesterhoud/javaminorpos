@@ -1,2 +1,48 @@
-sep 14, 2015 11:03:15 AM Utility.SingleLog <init>
+Sep 14, 2015 11:29:27 AM Utility.SingleLog <init>
 INFO: Log started
+Sep 14, 2015 11:29:52 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:29:53 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:29:55 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:43:31 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:43:49 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:43:59 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:44:25 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:44:29 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:44:31 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:45:17 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:45:20 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:45:24 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:45:51 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:45:58 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:46:00 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:48:03 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:48:08 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:48:09 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:48:29 AM Utility.SingleLog addInfo
+INFO: Sale started with unknown customer
+Sep 14, 2015 11:49:55 AM Utility.SingleLog <init>
+INFO: Log started
+Sep 14, 2015 11:50:15 AM Utility.SingleLog addInfo
+INFO: Sale started with customer: Laurens Oomen
+Sep 14, 2015 11:50:18 AM Utility.SingleLog addInfo
+INFO: Heineken Beer was added too the shopping list.
+Sep 14, 2015 11:50:31 AM Utility.SingleLog addInfo
+INFO: Sale started with unknown customer

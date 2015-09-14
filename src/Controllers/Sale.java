@@ -28,6 +28,7 @@ public class Sale {
     public void addProduct(Product product) {
         if (!order.containsKey(product)) {
             order.put(product, 1);
+
         } else {
             order.put(product, order.get(product) + 1);
         }

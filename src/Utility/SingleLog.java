@@ -19,7 +19,7 @@ public class SingleLog {
     private SingleLog(){
         logger = Logger.getLogger("posLog");
         try{
-            fh = new FileHandler("posLog");
+            fh = new FileHandler("posLog", true);
             logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
@@ -39,15 +39,32 @@ public class SingleLog {
             logIsAvailable = false;
             return log;
         } else {
-            return null;
+            return waitForLog();
         }
+    }
+
+    public static void closeLog(){
+        logIsAvailable = true;
+    }
+
+    private static SingleLog waitForLog(){
+        while (!logIsAvailable){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return getLog();
     }
 
     public void addInfo(String info){
         logger.info(info);
+        closeLog();
     }
 
     public void addWarning(String warning){
         logger.warning(warning);
+        closeLog();
     }
 }

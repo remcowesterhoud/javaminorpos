@@ -20,8 +20,8 @@ public abstract class Payment {
 
     public double requestAmount() {
         System.out.println("Enter the amount you'd like too pay.");
-        if (scanner.hasNextInt()){
-            return scanner.nextInt();
+        if (scanner.hasNextDouble()){
+            return scanner.nextDouble();
         }
         else{
             System.out.println("Please enter a valid amount.");
