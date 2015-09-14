@@ -5,9 +5,11 @@ import Enums.ProductType;
 import Models.Customer;
 import Models.Product;
 import Models.ProductSpec;
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -19,12 +21,14 @@ public class Register {
     private CustomerRegister customers;
     private ArrayList<Discount> discounts;
     private Sale sale;
+    private ArrayList<Sale> saleList;
     private Scanner scanner = new Scanner(System.in);
 
     public Register() {
         inventory = new Inventory();
         customers = new CustomerRegister();
         discounts = new ArrayList<Discount>();
+        saleList = new ArrayList<Sale>();
 
         addDummyData();
         newSale();
@@ -52,7 +56,16 @@ public class Register {
         switch (scanner.next()){
             case "checkout" :
                 sale.finish();
+                saleList.add(sale);
                 newSale();
+                break;
+            case "close" :
+                System.out.println("Overview of Sales made today:");
+                for(Sale sale : saleList){
+                    printSaleList(sale);
+                }
+                break;
+
             case "end" :
                 System.exit(0);
         }
@@ -96,6 +109,12 @@ public class Register {
         customers.addProduct(customer);
     }
 
+    private void printSaleList(Sale sale){
+        for(Map.Entry<Product, Integer> entry : sale.getOrder().entrySet()){
+
+        }
+        System.out.println();
+    }
     public static void main(String[] args){
         new Register();
     }
