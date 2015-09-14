@@ -57,7 +57,6 @@ public class Sale {
         double total = totalPrice();
         double productDiscount = calculateProductDiscount();
         double customerDiscount = calculateCustomerDiscount(total);
-//        double change = pay(total - productDiscount - customerDiscount);
         paymentHandler.completeTransaction(total - productDiscount - customerDiscount, order);
         Receipt receipt = new Receipt(order, total, productDiscount, customerDiscount, paymentHandler.getChange());
         receipt.generateReceipt();
