@@ -12,7 +12,6 @@ import java.util.logging.SimpleFormatter;
 public class SingleLog {
 
     private static SingleLog log;
-    private static boolean logIsAvailable = true;
     private static Logger logger;
     private static FileHandler fh;
 
@@ -32,39 +31,21 @@ public class SingleLog {
     }
 
     public static SingleLog getLog() {
-        if (logIsAvailable) {
-            if (log == null) {
-                log = new SingleLog();
-            }
-            logIsAvailable = false;
-            return log;
-        } else {
-            return waitForLog();
-        }
-    }
-
-    public static void closeLog(){
-        logIsAvailable = true;
-    }
-
-    private static SingleLog waitForLog(){
-        while (!logIsAvailable){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (log == null) {
+            synchronized (SingleLog.class) {
+                if (log == null) {
+                    log = new SingleLog();
+                }
             }
         }
-        return getLog();
+        return log;
     }
 
     public void addInfo(String info){
         logger.info(info);
-        closeLog();
     }
 
     public void addWarning(String warning){
         logger.warning(warning);
-        closeLog();
     }
 }
