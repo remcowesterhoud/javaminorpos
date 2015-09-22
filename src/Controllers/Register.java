@@ -1,11 +1,13 @@
 package Controllers;
 
 import Utility.Brand;
+import Utility.HttpRequest;
 import Utility.ProductType;
 import Models.Customer;
 import Models.Product;
 import Models.ProductSpec;
 import Utility.SingleLog;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,17 +21,16 @@ import java.util.logging.Logger;
 public class Register {
 
     private SingleLog log;
-    private Inventory inventory;
     private CustomerRegister customers;
     private ArrayList<Discount> discounts;
     private Sale sale;
     private ArrayList<Sale> saleList;
     private Scanner scanner = new Scanner(System.in);
+    private HttpRequest httpRequest = new HttpRequest();
+    private Gson gson = new Gson();
 
     public Register() {
-
         log = SingleLog.getLog();
-        inventory = new Inventory();
         customers = new CustomerRegister();
         discounts = new ArrayList<Discount>();
         saleList = new ArrayList<Sale>();
@@ -48,7 +49,7 @@ public class Register {
         System.out.println("Enter productcodes. Type checkout when done.");
         while (scanner.hasNextInt()){
             int input = scanner.nextInt();
-            Product product = inventory.searchProduct(input);
+            Product product = gson.fromJson(httpRequest.makeGetReqeust("http://localhost:8080/product/" + input), Product.class);
             if (product == null){
                 System.out.println("Product could not be found");
             }
@@ -102,14 +103,14 @@ public class Register {
     }
 
     private void addDummyData(){
-        HashMap map = new HashMap();
-        map.put("Merk", Brand.Heineken);
-        map.put("Type", ProductType.Beer);
-        ProductSpec spec = new ProductSpec(map);
-        Product beer = new Product(10, "Heineken Bier", spec, 123);
-        inventory.addProduct(beer);
-
-        discounts.add(new QuantityDiscount(beer, 2));
+//        HashMap map = new HashMap();
+//        map.put("Merk", Brand.Heineken);
+//        map.put("Type", ProductType.Beer);
+//        ProductSpec spec = new ProductSpec(map);
+//        Product beer = new Product(10, "Heineken Bier", spec, 123);
+//        inventory.addProduct(beer);
+//
+//        discounts.add(new QuantityDiscount(beer, 2));
 
         Customer customer = new Customer(123, "Laurens", "Oomen");
         customers.addProduct(customer);
