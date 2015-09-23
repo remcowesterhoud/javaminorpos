@@ -13,15 +13,15 @@ public class Sale {
 
     private HashMap<Product, Integer> order;
     private ArrayList<Discount> discounts;
-    private Customer customer;
+    private FidelityCard fidelityCard;
     private PaymentHandler paymentHandler;
 
     private static final double CUSTOMER_DISCOUNT = 5;
 
-    public Sale(ArrayList<Discount> discounts, Customer customer) {
+    public Sale(ArrayList<Discount> discounts, FidelityCard fidelityCard) {
         order = new HashMap<Product, Integer>();
         this.discounts = discounts;
-        this.customer = customer;
+        this.fidelityCard = fidelityCard;
         paymentHandler = new PaymentHandler();
     }
 
@@ -80,7 +80,7 @@ public class Sale {
     }
 
     private double calculateCustomerDiscount(double totalPrice) {
-        if (customer != null) {
+        if (fidelityCard != null) {
             return totalPrice * (CUSTOMER_DISCOUNT / 100);
         } else {
             return 0;

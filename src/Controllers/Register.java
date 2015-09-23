@@ -1,19 +1,14 @@
 package Controllers;
 
-import Utility.Brand;
 import Utility.HttpRequest;
-import Utility.ProductType;
-import Models.Customer;
+import Models.FidelityCard;
 import Models.Product;
-import Models.ProductSpec;
 import Utility.SingleLog;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 /**
  * Created by Remco on 8-9-2015.
@@ -21,27 +16,27 @@ import java.util.logging.Logger;
 public class Register {
 
     private SingleLog log;
-    private CustomerRegister customers;
     private ArrayList<Discount> discounts;
     private Sale sale;
     private ArrayList<Sale> saleList;
-    private Scanner scanner = new Scanner(System.in);
-    private HttpRequest httpRequest = new HttpRequest();
-    private Gson gson = new Gson();
+    private Scanner scanner;
+    private HttpRequest httpRequest;
+    private Gson gson;
 
     public Register() {
         log = SingleLog.getLog();
-        customers = new CustomerRegister();
         discounts = new ArrayList<Discount>();
         saleList = new ArrayList<Sale>();
+        scanner = new Scanner(System.in);
+        httpRequest = new HttpRequest();
+        gson = new Gson();
 
-        addDummyData();
         newSale();
     }
 
     private void newSale(){
-        Customer customer = checkCustomer();
-        sale = new Sale(discounts, customer);
+        FidelityCard fidelityCard = checkCustomer();
+        sale = new Sale(discounts, fidelityCard);
         checkForProducts();
     }
 
@@ -49,7 +44,7 @@ public class Register {
         System.out.println("Enter productcodes. Type checkout when done.");
         while (scanner.hasNextInt()){
             int input = scanner.nextInt();
-            Product product = gson.fromJson(httpRequest.makeGetReqeust("http://localhost:8080/product/" + input), Product.class);
+            Product product = gson.fromJson(httpRequest.makeGetReqeust("http://localhost:8080/products/" + input), Product.class);
             if (product == null){
                 System.out.println("Product could not be found");
             }
@@ -77,15 +72,15 @@ public class Register {
         }
     }
 
-    private Customer checkCustomer(){
+    private FidelityCard checkCustomer(){
         System.out.println("Please enter your customer code. Leave empty if not a customer");
         String input;
         if (!(input = scanner.nextLine()).isEmpty()){
             try {
-                Customer customer = customers.searchCustomer(Integer.parseInt(input));
-                if (customer != null) {
-                    log.addInfo("Sale started with customer: " + customer.getfName() + " " + customer.getsName());
-                    return customer;
+                FidelityCard fidelityCard = gson.fromJson(httpRequest.makeGetReqeust("http://localhost:8080/fidelitycards/" + input), FidelityCard.class);
+                if (fidelityCard != null) {
+                    log.addInfo("Sale started with customer: " + fidelityCard.getCustomerName());
+                    return fidelityCard;
                 } else {
                     System.out.println("Customer could not be found.");
                     return checkCustomer();
@@ -112,8 +107,8 @@ public class Register {
 //
 //        discounts.add(new QuantityDiscount(beer, 2));
 
-        Customer customer = new Customer(123, "Laurens", "Oomen");
-        customers.addProduct(customer);
+//        Customer customer = new Customer(123, "Laurens", "Oomen");
+//        customers.addProduct(customer);
     }
 
     private void printSaleList(Sale sale){
