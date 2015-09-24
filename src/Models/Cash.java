@@ -6,8 +6,7 @@ package Models;
  */
 public class Cash extends Payment {
 
-    public Cash(int id) {
-        super(id);
-        amount = requestAmount();
+    public Cash(int id, double amount) {
+        super(id, amount);
     }
 }

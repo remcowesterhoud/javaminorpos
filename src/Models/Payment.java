@@ -10,23 +10,13 @@ public abstract class Payment {
     protected double amount;
     protected int id;
 
-    public Payment(int id){
+    public Payment(int id, double amount){
         this.id = id;
+        this.amount = amount;
     }
 
     public double getAmountPayed() {
         return amount;
-    }
-
-    public double requestAmount() {
-        System.out.println("Enter the amount you'd like too pay.");
-        if (scanner.hasNextDouble()){
-            return scanner.nextDouble();
-        }
-        else{
-            System.out.println("Please enter a valid amount.");
-            return requestAmount();
-        }
     }
 
     public int getId(){

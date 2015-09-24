@@ -31,7 +31,8 @@ public class PaymentHandler {
         while (total > 0){
             System.out.println("You still need to pay $" + df.format(total));
             PaymentType type = getPaymentMetod();
-            total -= initiatePayment(type, order);
+            double amount = requestAmount();
+            total -= initiatePayment(type, order, total, amount);
         }
 
         if (total == 0){
@@ -56,33 +57,44 @@ public class PaymentHandler {
         return types[scanner.nextInt() - 1];
     }
 
-    private double initiatePayment(PaymentType type, HashMap<Product, Integer> order){
+    public double requestAmount() {
+        System.out.println("Enter the amount you'd like too pay.");
+        if (scanner.hasNextDouble()){
+            return scanner.nextDouble();
+        }
+        else{
+            System.out.println("Please enter a valid amount.");
+            return requestAmount();
+        }
+    }
+
+    private double initiatePayment(PaymentType type, HashMap<Product, Integer> order, double total, double amount){
         double amountPayed = 0;
         Payment payment;
 
         switch (type){
             case Cash:
-                payment = new Cash(payments.size() + 1);
+                payment = new Cash(payments.size() + 1, amount);
                 amountPayed = payment.getAmountPayed();
                 payments.add(payment);
                 break;
             case Bankcard:
-                payment = new Bankcard(payments.size() + 1);
+                payment = new Bankcard(payments.size() + 1, amount);
                 amountPayed = payment.getAmountPayed();
                 payments.add(payment);
                 break;
             case Cheque:
-                payment = new Cheque(payments.size() + 1, order);
+                payment = new Cheque(payments.size() + 1, order, amount);
                 amountPayed = payment.getAmountPayed();
                 payments.add(payment);
                 break;
             case Creditcard:
-                payment = new CreditCard(payments.size() + 1);
+                payment = new CreditCard(payments.size() + 1, amount);
                 amountPayed = payment.getAmountPayed();
                 payments.add(payment);
                 break;
             case Ewallet:
-                payment = new Ewallet(payments.size());
+                payment = new Ewallet(payments.size() + 1, amount);
                 amountPayed = payment.getAmountPayed();
                 payments.add(payment);
                 break;

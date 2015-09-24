@@ -10,13 +10,12 @@ import java.util.Map;
  */
 public class Cheque extends Payment {
 
-    public Cheque(int id, HashMap<Product, Integer> order){
-        super(id);
+    public Cheque(int id, HashMap<Product, Integer> order, double amount){
+        super(id, amount);
         handlePayment(order);
     }
 
     public double handlePayment(HashMap<Product, Integer> order){
-        amount = requestAmount();
         ProductType type = getChequeType();
         double max = calculateMax(order, type);
 

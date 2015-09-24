@@ -5,13 +5,7 @@ package Models;
  */
 public class CreditCard extends Payment {
 
-    public CreditCard(int id) {
-        super(id);
-    }
-
-    public double handlePayment(){
-        System.out.println("How much would you like to pay?");
-        amount = scanner.nextDouble();
-        return amount;
+    public CreditCard(int id, double amount) {
+        super(id, amount);
     }
 }

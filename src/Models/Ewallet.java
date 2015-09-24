@@ -5,8 +5,7 @@ package Models;
  */
 public class Ewallet extends Payment {
 
-    public Ewallet(int id) {
-        super(id);
-        amount = requestAmount();
+    public Ewallet(int id, double amount) {
+        super(id, amount);
     }
 }

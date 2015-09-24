@@ -5,8 +5,7 @@ package Models;
  */
 public class Bankcard extends Payment {
 
-    public Bankcard(int id) {
-        super(id);
-        amount = requestAmount();
+    public Bankcard(int id, double amount) {
+        super(id, amount);
     }
 }
